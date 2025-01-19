@@ -25,6 +25,7 @@ input {
 
 body * {
   color: black;
+  min-height: 100%;
 }
 
 html {
