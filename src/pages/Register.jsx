@@ -41,7 +41,7 @@ const Register = () => {
     if (response.status === 400) {
       return;
     } else {
-      const card = document.querySelector('#register > div.card');
+      const card = document.querySelector('div.card#register');
       card.querySelectorAll('*').forEach((elem) => elem.remove());
       const h2 = document.createElement('h2');
       card.appendChild(h2);
