@@ -50,7 +50,7 @@ const Login = () => {
 
   return (
     <div id='login' className='card'>
-      <h3>Sign in</h3>
+      <h2>Sign in</h2>
       <form
         onSubmit={(e) =>
           onsubmitHandler(

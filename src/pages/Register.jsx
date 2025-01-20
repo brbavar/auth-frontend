@@ -65,7 +65,7 @@ const Register = () => {
 
   return (
     <div id='register' className='card'>
-      <h3>Create an account</h3>
+      <h2>Create an account</h2>
       <form
         id='registration-form'
         onSubmit={(e) =>

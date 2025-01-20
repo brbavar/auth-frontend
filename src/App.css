@@ -17,6 +17,14 @@ input {
   background-color: white;
 }
 
+label {
+  font-size: 18px;
+}
+
+input {
+  font-size: 16px;
+}
+
 .container {
   margin: 0 3em;
 }
