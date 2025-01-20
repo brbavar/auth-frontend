@@ -63,91 +63,89 @@ export const PasswordReset = () => {
   };
 
   return (
-    <body id='password-reset'>
-      <div className='card'>
-        <form
-          id='password-reset-form'
-          onSubmit={(e) => {
+    <div id='password-reset' className='card'>
+      <form
+        id='password-reset-form'
+        onSubmit={(e) => {
+          onsubmitHandler(
+            e,
+            null,
+            'GET',
+            `get-password/${email}/${currPass}`,
             onsubmitHandler(
               e,
-              null,
-              'GET',
-              `get-password/${email}/${currPass}`,
-              onsubmitHandler(
-                e,
-                { Email: email },
-                'PUT',
-                'reset-password',
-                onPut,
-                onNotPut
-              )
-            );
-          }}
-        >
-          <div className='field'>
-            <label htmlFor='currPass'>Current password</label>
-            <div className='password-subfield'>
-              <input
-                id='currPass'
-                type={passVis1}
-                onChange={(e) => setCurrPass(e.target.value)}
-              />
-              <EyeIconBox
-                eyeClickHandler={eyeClickHandler1}
-                svgPath={svgPath1}
-                svgCX={svgCX1}
-                lineWidth={lineWidth1}
-              />
-            </div>
-          </div>
-          <div className='field'>
-            <label htmlFor='newPass'>New password</label>
-            <div className='password-subfield'>
-              <input
-                id='newPass'
-                type={passVis2}
-                onChange={(e) => {
-                  setNewPass(e.target.value);
-                  removeErrors();
-                }}
-              />
-              <EyeIconBox
-                eyeClickHandler={eyeClickHandler2}
-                svgPath={svgPath2}
-                svgCX={svgCX2}
-                lineWidth={lineWidth2}
-              />
-            </div>
-          </div>
-          <div className='field'>
-            <label htmlFor='passConfirmation'>Confirm password</label>
-            <div className='password-subfield'>
-              <input
-                id='passConfirmation'
-                type={passVis2}
-                onChange={(e) => {
-                  setPassConfirmation(e.target.value);
-                  removeErrors();
-                }}
-              />
-              <EyeIconBox
-                eyeClickHandler={eyeClickHandler2}
-                svgPath={svgPath2}
-                svgCX={svgCX2}
-                lineWidth={lineWidth2}
-              />
-            </div>
-          </div>
-          <div className='field'>
+              { Email: email },
+              'PUT',
+              'reset-password',
+              onPut,
+              onNotPut
+            )
+          );
+        }}
+      >
+        <div className='field'>
+          <label htmlFor='currPass'>Current password</label>
+          <div className='password-subfield'>
             <input
-              className='submit'
-              type='submit'
-              value='RESET'
-              disabled={!(currPass && newPass && passConfirmation)}
+              id='currPass'
+              type={passVis1}
+              onChange={(e) => setCurrPass(e.target.value)}
+            />
+            <EyeIconBox
+              eyeClickHandler={eyeClickHandler1}
+              svgPath={svgPath1}
+              svgCX={svgCX1}
+              lineWidth={lineWidth1}
             />
           </div>
-        </form>
-      </div>
-    </body>
+        </div>
+        <div className='field'>
+          <label htmlFor='newPass'>New password</label>
+          <div className='password-subfield'>
+            <input
+              id='newPass'
+              type={passVis2}
+              onChange={(e) => {
+                setNewPass(e.target.value);
+                removeErrors();
+              }}
+            />
+            <EyeIconBox
+              eyeClickHandler={eyeClickHandler2}
+              svgPath={svgPath2}
+              svgCX={svgCX2}
+              lineWidth={lineWidth2}
+            />
+          </div>
+        </div>
+        <div className='field'>
+          <label htmlFor='passConfirmation'>Confirm password</label>
+          <div className='password-subfield'>
+            <input
+              id='passConfirmation'
+              type={passVis2}
+              onChange={(e) => {
+                setPassConfirmation(e.target.value);
+                removeErrors();
+              }}
+            />
+            <EyeIconBox
+              eyeClickHandler={eyeClickHandler2}
+              svgPath={svgPath2}
+              svgCX={svgCX2}
+              lineWidth={lineWidth2}
+            />
+          </div>
+        </div>
+        <div className='field'>
+          <input
+            className='submit'
+            type='submit'
+            value='RESET'
+            disabled={!(currPass && newPass && passConfirmation)}
+          />
+        </div>
+      </form>
+    </div>
   );
 };

@@ -23,39 +23,37 @@ export const ResetPassword = () => {
   };
 
   return (
-    <body id='reset-password'>
-      <div className='card'>
-        <h2>Forgot your password?</h2>
-        <h3 id='please-provide-email'>
-          To reset it please provide your email address:
-        </h3>
-        <form
-          id='password-reset-form'
-          onSubmit={(e) =>
-            onsubmitHandler(
-              e,
-              null,
-              'GET',
-              `check-if-reset-sendable/${email}`,
-              onfulfilled,
-              onrejected
-            )
-          }
-        >
-          <input
-            id='email-input'
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-          />
-          <input
-            className='submit'
-            type='submit'
-            value='SEND RESET EMAIL'
-            disabled={!email}
-          />
-        </form>
-      </div>
-    </body>
+    <div id='reset-password' className='card'>
+      <h2>Forgot your password?</h2>
+      <h3 id='please-provide-email'>
+        To reset it please provide your email address:
+      </h3>
+      <form
+        id='password-reset-form'
+        onSubmit={(e) =>
+          onsubmitHandler(
+            e,
+            null,
+            'GET',
+            `check-if-reset-sendable/${email}`,
+            onfulfilled,
+            onrejected
+          )
+        }
+      >
+        <input
+          id='email-input'
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
+        />
+        <input
+          className='submit'
+          type='submit'
+          value='SEND RESET EMAIL'
+          disabled={!email}
+        />
+      </form>
+    </div>
   );
 };

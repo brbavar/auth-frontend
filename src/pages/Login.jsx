@@ -49,63 +49,61 @@ const Login = () => {
   };
 
   return (
-    <body id='login'>
-      <div className='card'>
-        <h3>Sign in</h3>
-        <form
-          onSubmit={(e) =>
-            onsubmitHandler(
-              e,
-              null,
-              'GET',
-              `emails/${email}/passwords/${password}`,
-              onfulfilled,
-              onrejected
-            )
-          }
-        >
-          <div className='field'>
-            <label htmlFor='email'>Email</label>
+    <div id='login' className='card'>
+      <h3>Sign in</h3>
+      <form
+        onSubmit={(e) =>
+          onsubmitHandler(
+            e,
+            null,
+            'GET',
+            `emails/${email}/passwords/${password}`,
+            onfulfilled,
+            onrejected
+          )
+        }
+      >
+        <div className='field'>
+          <label htmlFor='email'>Email</label>
+          <input
+            id='email'
+            type='email'
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div className='field'>
+          <label htmlFor='password'>Password</label>
+          <div className='password-subfield'>
             <input
-              id='email'
-              type='email'
-              onChange={(e) => setEmail(e.target.value)}
+              style={{ width: '100%' }}
+              id='password'
+              type={passVis}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <EyeIconBox
+              eyeClickHandler={eyeClickHandler}
+              svgPath={svgPath}
+              svgCX={svgCX}
+              lineWidth={lineWidth}
             />
           </div>
-          <div className='field'>
-            <label htmlFor='password'>Password</label>
-            <div className='password-subfield'>
-              <input
-                style={{ width: '100%' }}
-                id='password'
-                type={passVis}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <EyeIconBox
-                eyeClickHandler={eyeClickHandler}
-                svgPath={svgPath}
-                svgCX={svgCX}
-                lineWidth={lineWidth}
-              />
-            </div>
-            <a href='/reset-password' style={{ fontSize: '10pt' }}>
-              Forgot password?
-            </a>
-          </div>
-          <div className='field'>
-            <input
-              className='submit'
-              type='submit'
-              value='SIGN IN'
-              disabled={!(email && password)}
-            />
-          </div>
-          <p style={{ fontSize: '10pt' }}>
-            New to the site? <a href='register'>Create an account.</a>
-          </p>
-        </form>
-      </div>
-    </body>
+          <a href='/reset-password' style={{ fontSize: '10pt' }}>
+            Forgot password?
+          </a>
+        </div>
+        <div className='field'>
+          <input
+            className='submit'
+            type='submit'
+            value='SIGN IN'
+            disabled={!(email && password)}
+          />
+        </div>
+        <p style={{ fontSize: '10pt' }}>
+          New to the site? <a href='register'>Create an account.</a>
+        </p>
+      </form>
+    </div>
   );
 };
 

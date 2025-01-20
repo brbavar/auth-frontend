@@ -25,7 +25,6 @@ input {
 
 body * {
   color: black;
-  min-height: 100%;
 }
 
 html {
@@ -55,36 +54,43 @@ input.submit {
 
 /* STYLES FOR LOGIN & REGISTER PAGES BELOW */
 
-body#login,
-body#register,
-body#verify-email,
-body#loading,
-body#email-verified,
-body#email-not-verified,
-body#logged-in,
-body#reset-password,
-body#password-reset,
-body#found {
-  height: 100vh;
+body:where(
+    :has(> #login),
+    :has(> #register),
+    :has(> #verify-email),
+    :has(> #loading),
+    :has(> #email-verified),
+    :has(> #email-not-verified),
+    :has(> #logged-in),
+    :has(> #reset-password),
+    :has(> #password-reset)
+  ) {
+  /* height: 100vh; */
+  min-height: 100%;
   width: 100vw;
 }
 
-body#login,
-body#verify-email,
-body#loading,
-body#reset-password,
-body#password-reset,
-body#found {
+body:where(
+    :has(> #login),
+    :has(> #verify-email),
+    :has(> #loading),
+    :has(> #reset-password),
+    :has(> #password-reset)
+  ) {
   overflow: hidden;
 }
 
-body#login,
-body#register,
-body#verify-email,
-body#loading,
-body#reset-password,
-body#password-reset,
-body#found {
+body:has(
+    > #root
+      > :where(
+        #login,
+        #register,
+        #verify-email,
+        #loading,
+        #reset-password,
+        #password-reset
+      )
+  ) {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -95,10 +101,7 @@ body#found {
   );
 }
 
-body#login .card,
-body#register .card,
-body#reset-password .card,
-body#password-reset .card {
+.card:where(#login, #register, #reset-password, #password-reset) {
   background-color: white;
   border-radius: 10px;
   width: 70vw;
@@ -110,48 +113,25 @@ body#password-reset .card {
   padding-right: 43px;
 }
 
-/* body#login .card {
-  height: 400px;
-}
-
-body#register .card {
-  height: 600px;
-}
-
-body#password-reset .card {
-  height: 350px;
-} */
-
 .card {
   box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.338);
 }
 
 form {
-  /* height: 150px; */
   width: 100%;
 }
 
-body#register form,
-body#register form > div,
-body#login form,
-body#login form > div,
-body#reset-password form > div,
-body#reset-password form,
-body#password-reset form,
-body#password-reset form > div {
+.card:where(#register, #login, #reset-password, #password-reset)
+  :where(form, form > div) {
   display: flex;
   flex-direction: column;
 }
 
-body#register form,
-body#login form,
-body#reset-password form,
-body#password-reset form {
+.card:where(#register, #login, #reset-password, #password-reset) form {
   gap: 3em;
 }
 
 .field {
-  position: relative;
   width: 95%;
 }
 
@@ -167,10 +147,9 @@ body#password-reset form {
 
 .password-section {
   gap: 1em;
-  position: relative;
 }
 
-body#password-reset .password-subfield > input {
+.card#password-reset .password-subfield > input {
   width: 85%;
 }
 
@@ -183,10 +162,7 @@ select {
 }
 
 .eye-icon {
-  /* position: absolute; */
   transform: scale(0.5);
-  /* top: -2.25px; */
-  /* right: -30px; */
 }
 
 .eye-icon:hover {
@@ -205,8 +181,6 @@ select {
 }
 
 .name-section {
-  /* display: flex; */
-  flex-direction: row;
   gap: 2em;
 }
 
@@ -229,21 +203,24 @@ form button.submit {
   border-radius: 10px;
 }
 
-body#login,
-body#register,
-body#verify-email,
-body#reset-password,
-body#password-reset,
-body#found,
-body#email-verified,
-body#logged-in {
+body:has(
+    > #root
+      > :where(
+        #login,
+        #register,
+        #verify-email,
+        #reset-password,
+        #password-reset,
+        #email-verified,
+        #logged-in
+      )
+  ) {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
 }
 
-body#email-verified,
-body#logged-in {
+body:has(> #root > :where(#email-verified, #logged-in)) {
   background-image: linear-gradient(
     60deg,
     rgba(19, 20, 20, 0.8),
@@ -251,7 +228,7 @@ body#logged-in {
   );
 }
 
-body#email-not-verified {
+.card#email-not-verified {
   background-image: linear-gradient(
     60deg,
     rgba(8, 7, 7, 0.8),
@@ -263,17 +240,15 @@ body#email-not-verified {
   background-color: white;
 }
 
-body#verify-email,
-body#email-verified,
-body#email-not-verified,
-body#logged-in {
+body:has(
+    > #root
+      > :where(#verify-email, #email-verified, #email-not-verified, #logged-in)
+  ) {
   position: relative;
 }
 
-#verify-email > .cutout,
-#email-verified > .cutout,
-#email-not-verified > .container,
-#logged-in > .cutout {
+.cutout:where(#verify-email, #email-verified, #logged-in),
+.container#email-not-verified {
   margin: 0 auto;
   text-align: center;
   position: absolute;
@@ -284,11 +259,9 @@ body#logged-in {
   transform: translate(-50%, -50%);
 }
 
-#verify-email > .cutout,
+.cutout:where(#verify-email, #email-verified, #logged-in),
 #loading > div,
-#email-verified > .cutout,
-#email-not-verified > .container > .cutout,
-#logged-in > .cutout {
+.container#email-not-verified > .cutout {
   font-size: 9vw;
   font-weight: bold;
 }
@@ -297,10 +270,8 @@ body#logged-in {
   color: white;
 }
 
-#verify-email > .cutout,
-#email-verified > .cutout,
-#email-not-verified > .container > .cutout,
-#logged-in > .cutout {
+.cutout:where(#verify-email, #email-verified, #logged-in),
+.container#email-not-verified > .cutout {
   background-color: white;
   mix-blend-mode: screen;
 }
@@ -323,10 +294,7 @@ h1 {
 }
 
 @media (min-width: 1024px) {
-  body#login .card,
-  body#register .card,
-  body#reset-password .card,
-  body#password-reset .card {
+  .card:where(#login, #register, #reset-password, #password-reset) {
     width: 350px;
   }
 

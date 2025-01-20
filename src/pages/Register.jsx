@@ -64,103 +64,101 @@ const Register = () => {
   };
 
   return (
-    <body id='register'>
-      <div className='card'>
-        <h3>Create an account</h3>
-        <form
-          id='registration-form'
-          onSubmit={(e) =>
-            onsubmitHandler(e, null, 'POST', 'register/', onPost, onNotPost)
-          }
-        >
+    <div id='register' className='card'>
+      <h3>Create an account</h3>
+      <form
+        id='registration-form'
+        onSubmit={(e) =>
+          onsubmitHandler(e, null, 'POST', 'register/', onPost, onNotPost)
+        }
+      >
+        <div className='field'>
+          <label htmlFor='email'>Email</label>
+          <input
+            id='email'
+            name='Email'
+            type='email'
+            onChange={(e) => {
+              setEmail(e.target.value);
+              removeErrors();
+            }}
+          />
+        </div>
+        <div className='name-section'>
           <div className='field'>
-            <label htmlFor='email'>Email</label>
+            <label htmlFor='first-name'>First name</label>
             <input
-              id='email'
-              name='Email'
-              type='email'
-              onChange={(e) => {
-                setEmail(e.target.value);
-                removeErrors();
-              }}
+              id='first-name'
+              name='First name'
+              type='text'
+              onChange={removeErrors()}
             />
           </div>
-          <div className='name-section'>
-            <div className='field'>
-              <label htmlFor='first-name'>First name</label>
-              <input
-                id='first-name'
-                name='First name'
-                type='text'
-                onChange={removeErrors()}
-              />
-            </div>
-            <div className='field'>
-              <label htmlFor='last-name'>Last name</label>
-              <input
-                id='last-name'
-                name='Last name'
-                type='text'
-                onChange={removeErrors()}
-              />
-            </div>
+          <div className='field'>
+            <label htmlFor='last-name'>Last name</label>
+            <input
+              id='last-name'
+              name='Last name'
+              type='text'
+              onChange={removeErrors()}
+            />
           </div>
-          <div className='password-section'>
-            <div className='field'>
-              <label htmlFor='password'>Password</label>
-              <div className='password-subfield'>
-                <input
-                  style={{ width: '100%' }}
-                  id='password'
-                  name='Password'
-                  type={passVis}
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                    removeErrors();
-                  }}
-                />
-                <EyeIconBox
-                  eyeClickHandler={eyeClickHandler}
-                  svgPath={svgPath}
-                  svgCX={svgCX}
-                  lineWidth={lineWidth}
-                />
-              </div>
-            </div>
-            <div className='field'>
-              <label htmlFor='confirm'>Confirm password</label>
-              <div className='password-subfield'>
-                <input
-                  style={{ width: '100%' }}
-                  id='confirm'
-                  name='Confirm password'
-                  type={passVis}
-                  onChange={removeErrors()}
-                />
-                <EyeIconBox
-                  eyeClickHandler={eyeClickHandler}
-                  svgPath={svgPath}
-                  svgCX={svgCX}
-                  lineWidth={lineWidth}
-                />
-              </div>
+        </div>
+        <div className='password-section'>
+          <div className='field'>
+            <label htmlFor='password'>Password</label>
+            <div className='password-subfield'>
+              <input
+                style={{ width: '100%' }}
+                id='password'
+                name='Password'
+                type={passVis}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  removeErrors();
+                }}
+              />
+              <EyeIconBox
+                eyeClickHandler={eyeClickHandler}
+                svgPath={svgPath}
+                svgCX={svgCX}
+                lineWidth={lineWidth}
+              />
             </div>
           </div>
           <div className='field'>
-            <input
-              className='submit'
-              type='submit'
-              name='Create account'
-              value='Create account'
-              disabled={!(email && password)}
-            />
+            <label htmlFor='confirm'>Confirm password</label>
+            <div className='password-subfield'>
+              <input
+                style={{ width: '100%' }}
+                id='confirm'
+                name='Confirm password'
+                type={passVis}
+                onChange={removeErrors()}
+              />
+              <EyeIconBox
+                eyeClickHandler={eyeClickHandler}
+                svgPath={svgPath}
+                svgCX={svgCX}
+                lineWidth={lineWidth}
+              />
+            </div>
           </div>
-          <p style={{ fontSize: '10pt' }}>
-            Already have an account? <a href='/'>Sign in.</a>
-          </p>
-        </form>
-      </div>
-    </body>
+        </div>
+        <div className='field'>
+          <input
+            className='submit'
+            type='submit'
+            name='Create account'
+            value='Create account'
+            disabled={!(email && password)}
+          />
+        </div>
+        <p style={{ fontSize: '10pt' }}>
+          Already have an account? <a href='/'>Sign in.</a>
+        </p>
+      </form>
+    </div>
   );
 };
 

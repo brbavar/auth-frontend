@@ -35,12 +35,7 @@ export const EmailVerification = () => {
     loadVerification();
   }, [setToken, VerificationString]);
 
-  if (isLoading)
-    return (
-      <body id='loading'>
-        <div>Loading...</div>
-      </body>
-    );
+  if (isLoading) return <div id='loading'>Loading...</div>;
   if (!isSuccess) return <EmailNotVerified />;
   return <EmailVerified />;
 };

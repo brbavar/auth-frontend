@@ -15,9 +15,9 @@ const PasswordResetSuccess = () => {
   }, [navigate]);
 
   return (
-    <body id='logged-in'>
-      <div className='cutout'>Your password has been updated!</div>
-    </body>
+    <div id='logged-in' className='cutout'>
+      Your password has been updated!
+    </div>
   );
 };
 
