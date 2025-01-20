@@ -50,16 +50,29 @@ export const PasswordReset = () => {
   };
 
   const onNotPut = async (response) => {
-    const errorField = document.createElement('div');
-    errorField.classList.add('field');
-    errorField.id = 'error-field';
+    const passwordResetForm = document.getElementById('password-reset-form');
+
+    let errorField;
+    if ((errorField = document.getElementById('error-field'))) {
+      errorField.innerHTML = '';
+    } else {
+      errorField = document.createElement('div');
+      errorField.classList.add('field');
+      errorField.id = 'error-field';
+
+      passwordResetForm.appendChild(errorField);
+
+      errorField.style.color = 'red';
+      errorField.style.fontSize = '10pt';
+    }
 
     const errors = (await response).response.data.errors;
     for (let error of errors) errorField.innerHTML += `${error.msg}<br>`;
-    errorField.style.color = 'red';
-    errorField.style.fontSize = '10pt';
 
-    document.getElementById('password-reset-form').appendChild(errorField);
+    passwordResetForm.scrollIntoView({
+      behavior: 'smooth',
+      block: 'end',
+    });
   };
 
   return (

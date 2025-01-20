@@ -51,16 +51,29 @@ const Register = () => {
   };
 
   const onNotPost = async (response) => {
-    const errorField = document.createElement('div');
-    errorField.classList.add('field');
-    errorField.id = 'error-field';
+    const registrationForm = document.getElementById('registration-form');
+
+    let errorField;
+    if ((errorField = document.getElementById('error-field'))) {
+      errorField.innerHTML = '';
+    } else {
+      errorField = document.createElement('div');
+      errorField.classList.add('field');
+      errorField.id = 'error-field';
+
+      registrationForm.appendChild(errorField);
+
+      errorField.style.color = 'red';
+      errorField.style.fontSize = '10pt';
+    }
 
     const errors = (await response).response.data.errors;
     for (let error of errors) errorField.innerHTML += `${error.msg}<br>`;
-    errorField.style.color = 'red';
-    errorField.style.fontSize = '10pt';
 
-    document.getElementById('registration-form').appendChild(errorField);
+    registrationForm.scrollIntoView({
+      behavior: 'smooth',
+      block: 'end',
+    });
   };
 
   return (
