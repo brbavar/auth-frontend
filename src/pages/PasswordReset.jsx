@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import onsubmitHandler from '../lib/onsubmitHandler';
-import { removeErrors } from '../lib/removeErrors';
 
 import EyeIconBox from '../components/EyeIconBox';
 import { eyeOpen, togglePasswordVisibility } from '../lib/password-visibility';
@@ -120,7 +119,6 @@ export const PasswordReset = () => {
               type={passVis2}
               onChange={(e) => {
                 setNewPass(e.target.value);
-                removeErrors();
               }}
             />
             <EyeIconBox
@@ -139,7 +137,6 @@ export const PasswordReset = () => {
               type={passVis2}
               onChange={(e) => {
                 setPassConfirmation(e.target.value);
-                removeErrors();
               }}
             />
             <EyeIconBox

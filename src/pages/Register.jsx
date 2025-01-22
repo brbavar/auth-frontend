@@ -6,7 +6,6 @@ import EyeIconBox from '../components/EyeIconBox';
 import { eyeOpen, togglePasswordVisibility } from '../lib/password-visibility';
 
 import onsubmitHandler from '../lib/onsubmitHandler';
-import { removeErrors } from '../lib/removeErrors';
 
 const Register = () => {
   useEffect(() => {
@@ -93,28 +92,17 @@ const Register = () => {
             type='email'
             onChange={(e) => {
               setEmail(e.target.value);
-              removeErrors();
             }}
           />
         </div>
         <div className='name-section'>
           <div className='field'>
             <label htmlFor='first-name'>First name</label>
-            <input
-              id='first-name'
-              name='First name'
-              type='text'
-              onChange={removeErrors()}
-            />
+            <input id='first-name' name='First name' type='text' />
           </div>
           <div className='field'>
             <label htmlFor='last-name'>Last name</label>
-            <input
-              id='last-name'
-              name='Last name'
-              type='text'
-              onChange={removeErrors()}
-            />
+            <input id='last-name' name='Last name' type='text' />
           </div>
         </div>
         <div className='password-section'>
@@ -128,7 +116,6 @@ const Register = () => {
                 type={passVis}
                 onChange={(e) => {
                   setPassword(e.target.value);
-                  removeErrors();
                 }}
               />
               <EyeIconBox
@@ -147,7 +134,6 @@ const Register = () => {
                 id='confirm'
                 name='Confirm password'
                 type={passVis}
-                onChange={removeErrors()}
               />
               <EyeIconBox
                 eyeClickHandler={eyeClickHandler}
