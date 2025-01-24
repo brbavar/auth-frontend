@@ -5,7 +5,9 @@ import { useToken } from '../lib/useToken';
 import EyeIconBox from '../components/EyeIconBox';
 import { eyeOpen, togglePasswordVisibility } from '../lib/password-visibility';
 
+import { onrejected } from '../lib/onrejected';
 import onsubmitHandler from '../lib/onsubmitHandler';
+import { buttonContainerClickHandler } from '../lib/buttonContainerClickHandler';
 
 const Register = () => {
   useEffect(() => {
@@ -28,12 +30,16 @@ const Register = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isDisabled, setIsDisabled] = useState(true);
+
+  if (!isDisabled && !(email && password)) setIsDisabled(true);
+  if (isDisabled && email && password) setIsDisabled(false);
 
   let [token, setToken] = useToken();
 
   const navigate = useNavigate();
 
-  const onPost = async (response) => {
+  const onfulfilled = async (response) => {
     ({ token } = await response.data);
     setToken(token);
 
@@ -49,39 +55,20 @@ const Register = () => {
     }
   };
 
-  const onNotPost = async (response) => {
-    const registrationForm = document.getElementById('registration-form');
-
-    let errorField;
-    if ((errorField = document.getElementById('error-field'))) {
-      errorField.innerHTML = '';
-    } else {
-      errorField = document.createElement('div');
-      errorField.classList.add('field');
-      errorField.id = 'error-field';
-
-      registrationForm.appendChild(errorField);
-
-      errorField.style.color = 'red';
-      errorField.style.fontSize = '10pt';
-    }
-
-    const errors = (await response).response.data.errors;
-    for (let error of errors) errorField.innerHTML += `${error.msg}<br>`;
-
-    registrationForm.scrollIntoView({
-      behavior: 'smooth',
-      block: 'end',
-    });
-  };
-
   return (
     <div id='register' className='card'>
       <h2>Create an account</h2>
       <form
         id='registration-form'
         onSubmit={(e) =>
-          onsubmitHandler(e, null, 'POST', 'register/', onPost, onNotPost)
+          onsubmitHandler(
+            e,
+            null,
+            'POST',
+            'register/',
+            onfulfilled,
+            (response) => onrejected(response, 'registration-form')
+          )
         }
       >
         <div className='field'>
@@ -144,13 +131,22 @@ const Register = () => {
             </div>
           </div>
         </div>
-        <div className='field'>
+        <div
+          className='field'
+          onClick={() =>
+            buttonContainerClickHandler(
+              'Must provide email and password to submit',
+              'registration-form'
+            )
+          }
+        >
           <input
             className='submit'
             type='submit'
             name='Create account'
             value='Create account'
-            disabled={!(email && password)}
+            disabled={isDisabled}
+            style={{ pointerEvents: isDisabled ? 'none' : '' }}
           />
         </div>
         <p style={{ fontSize: '10pt' }}>

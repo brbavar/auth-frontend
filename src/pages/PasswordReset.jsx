@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { onrejected } from '../lib/onrejected';
 import onsubmitHandler from '../lib/onsubmitHandler';
+import { buttonContainerClickHandler } from '../lib/buttonContainerClickHandler';
 
 import EyeIconBox from '../components/EyeIconBox';
 import { eyeOpen, togglePasswordVisibility } from '../lib/password-visibility';
@@ -38,40 +40,19 @@ export const PasswordReset = () => {
   const [currPass, setCurrPass] = useState('');
   const [newPass, setNewPass] = useState('');
   const [passConfirmation, setPassConfirmation] = useState('');
+  const [isDisabled, setIsDisabled] = useState(true);
+
+  if (!isDisabled && !(currPass && newPass && passConfirmation))
+    setIsDisabled(true);
+  if (isDisabled && currPass && newPass && passConfirmation)
+    setIsDisabled(false);
 
   const email = localStorage.getItem('email');
-  //   const userInfo = { Email: email };
 
   const navigate = useNavigate();
 
-  const onPut = () => {
+  const onfulfilled = () => {
     return navigate('/password-reset-success');
-  };
-
-  const onNotPut = async (response) => {
-    const passwordResetForm = document.getElementById('password-reset-form');
-
-    let errorField;
-    if ((errorField = document.getElementById('error-field'))) {
-      errorField.innerHTML = '';
-    } else {
-      errorField = document.createElement('div');
-      errorField.classList.add('field');
-      errorField.id = 'error-field';
-
-      passwordResetForm.appendChild(errorField);
-
-      errorField.style.color = 'red';
-      errorField.style.fontSize = '10pt';
-    }
-
-    const errors = (await response).response.data.errors;
-    for (let error of errors) errorField.innerHTML += `${error.msg}<br>`;
-
-    passwordResetForm.scrollIntoView({
-      behavior: 'smooth',
-      block: 'end',
-    });
   };
 
   return (
@@ -89,8 +70,8 @@ export const PasswordReset = () => {
               { Email: email },
               'PUT',
               'reset-password',
-              onPut,
-              onNotPut
+              onfulfilled,
+              (response) => onrejected(response, 'password-reset-form')
             )
           );
         }}
@@ -147,12 +128,20 @@ export const PasswordReset = () => {
             />
           </div>
         </div>
-        <div className='field'>
+        <div
+          className='field'
+          onClick={() =>
+            buttonContainerClickHandler(
+              'Must complete form to submit',
+              'password-reset-form'
+            )
+          }
+        >
           <input
             className='submit'
             type='submit'
             value='RESET'
-            disabled={!(currPass && newPass && passConfirmation)}
+            disabled={isDisabled}
           />
         </div>
       </form>
