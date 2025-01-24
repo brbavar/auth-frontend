@@ -1,1 +1,1 @@
-This is the frontend of my auth application, [Authogonal](https://authogonal.netlify.app/).
+This is the frontend of my auth application, [Authogonal](https://authogonal.netlify.app/). Authogonal's code is organized in accordance with the MVC architecture. This entire repository is a React application serving as an implementation of the View layer. As for the Model and Controller layers, their implementations are on the backend, which you can find in my repo [`auth-backend`](https://github.com/brbavar/auth-backend).
