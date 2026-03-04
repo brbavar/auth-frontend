@@ -20,7 +20,7 @@ export const PasswordReset = () => {
       [passVis1, setPassVis1],
       [svgPath1, setSVGPath1],
       [svgCX1, setSVGcx1],
-      [lineWidth1, setLineWidth1]
+      [lineWidth1, setLineWidth1],
     );
 
   const [svgPath2, setSVGPath2] = useState(eyeOpen);
@@ -34,7 +34,7 @@ export const PasswordReset = () => {
       [passVis2, setPassVis2],
       [svgPath2, setSVGPath2],
       [svgCX2, setSVGcx2],
-      [lineWidth2, setLineWidth2]
+      [lineWidth2, setLineWidth2],
     );
 
   const [currPass, setCurrPass] = useState('');
@@ -64,15 +64,15 @@ export const PasswordReset = () => {
             e,
             null,
             'GET',
-            `get-password/${email}/${currPass}`,
+            `passwords/${email}/${currPass}`,
             onsubmitHandler(
               e,
               { Email: email },
               'PUT',
-              'reset-password',
+              'passwords',
               onfulfilled,
-              (response) => onrejected(response, 'password-reset-form')
-            )
+              (response) => onrejected(response, 'password-reset-form'),
+            ),
           );
         }}
       >
@@ -133,7 +133,7 @@ export const PasswordReset = () => {
           onClick={() =>
             buttonContainerClickHandler(
               'Must complete form to submit',
-              'password-reset-form'
+              'password-reset-form',
             )
           }
         >

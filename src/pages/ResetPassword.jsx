@@ -35,9 +35,9 @@ export const ResetPassword = () => {
             e,
             null,
             'GET',
-            `check-if-reset-sendable/${email}`,
+            `users/${email}`,
             onfulfilled,
-            onrejected
+            onrejected,
           )
         }
       >

@@ -26,7 +26,7 @@ const Login = () => {
       [passVis, setPassVis],
       [svgPath, setSVGPath],
       [svgCX, setSVGcx],
-      [lineWidth, setLineWidth]
+      [lineWidth, setLineWidth],
     );
 
   const [email, setEmail] = useState('');
@@ -57,9 +57,9 @@ const Login = () => {
             e,
             null,
             'GET',
-            `emails/${email}/passwords/${password}`,
+            `users/${email}/${password}`,
             onfulfilled,
-            onrejected
+            onrejected,
           )
         }
       >

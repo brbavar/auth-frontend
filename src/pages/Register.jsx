@@ -25,7 +25,7 @@ const Register = () => {
       [passVis, setPassVis],
       [svgPath, setSVGPath],
       [svgCX, setSVGcx],
-      [lineWidth, setLineWidth]
+      [lineWidth, setLineWidth],
     );
 
   const [email, setEmail] = useState('');
@@ -61,13 +61,8 @@ const Register = () => {
       <form
         id='registration-form'
         onSubmit={(e) =>
-          onsubmitHandler(
-            e,
-            null,
-            'POST',
-            'register/',
-            onfulfilled,
-            (response) => onrejected(response, 'registration-form')
+          onsubmitHandler(e, null, 'POST', 'users/', onfulfilled, (response) =>
+            onrejected(response, 'registration-form'),
           )
         }
       >
@@ -136,7 +131,7 @@ const Register = () => {
           onClick={() =>
             buttonContainerClickHandler(
               'Must provide email and password to submit',
-              'registration-form'
+              'registration-form',
             )
           }
         >

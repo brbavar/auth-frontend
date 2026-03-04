@@ -16,10 +16,10 @@ export const EmailVerification = () => {
     const loadVerification = async () => {
       try {
         const response = await axios.put(
-          `${import.meta.env.VITE_BASE_URL}verify-email`,
+          `${import.meta.env.VITE_BASE_URL}verification-strings`,
           {
             VerificationString,
-          }
+          },
         );
         const { token } = response.data;
         setToken(token);
