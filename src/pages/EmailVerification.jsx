@@ -15,12 +15,9 @@ export const EmailVerification = () => {
   useEffect(() => {
     const loadVerification = async () => {
       try {
-        const response = await axios.put(
-          `${import.meta.env.VITE_BASE_URL}verification-strings`,
-          {
-            VerificationString,
-          },
-        );
+        const response = await axios.put('/api/verification-strings', {
+          VerificationString,
+        });
         const { token } = response.data;
         setToken(token);
 

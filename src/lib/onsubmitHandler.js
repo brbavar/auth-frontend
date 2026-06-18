@@ -9,7 +9,7 @@ const jsonifyForm = (form) => {
   const jsonifiedForm = {};
   for (var i = 0; i < formKeyNodes.length; i++)
     jsonifiedForm[formKeyNodes[i].textContent] = form.classList.contains(
-      'checkboxes'
+      'checkboxes',
     )
       ? formValNodes[i].checked
       : formValNodes[i].value;
@@ -23,7 +23,7 @@ const onsubmitHandler = (
   method = '',
   path,
   onfulfilled,
-  onrejected
+  onrejected,
 ) => {
   e.preventDefault();
 
@@ -36,18 +36,22 @@ const onsubmitHandler = (
       formData[userInfoKeys[i]] = userInfoVals[i];
   }
 
-  const fullUrl = `${import.meta.env.VITE_BASE_URL}${path}`;
+  // const fullUrl = `${import.meta.env.VITE_BASE_URL}${path}`;
+  const fullPath = `/api/${path}`;
   let response;
 
   switch (method) {
     case 'GET':
-      response = axios.get(fullUrl).then(onfulfilled, onrejected);
+      // response = axios.get(fullUrl).then(onfulfilled, onrejected);
+      response = axios.get(fullPath).then(onfulfilled, onrejected);
       break;
     case 'POST':
-      response = axios.post(fullUrl, formData).then(onfulfilled, onrejected);
+      // response = axios.post(fullUrl, formData).then(onfulfilled, onrejected);
+      response = axios.post(fullPath, formData).then(onfulfilled, onrejected);
       break;
     case 'PUT':
-      response = axios.put(fullUrl, formData).then(onfulfilled, onrejected);
+      // response = axios.put(fullUrl, formData).then(onfulfilled, onrejected);
+      response = axios.put(fullPath, formData).then(onfulfilled, onrejected);
       break;
   }
 
