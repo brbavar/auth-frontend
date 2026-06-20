@@ -7,34 +7,34 @@ import { EmailVerified } from '../components/EmailVerified';
 import { EmailNotVerified } from '../components/EmailNotVerified';
 
 export const EmailVerification = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const { VerificationString } = useParams();
-  const [, setToken] = useToken();
+  // const [isLoading, setIsLoading] = useState(true);
+  // const [isSuccess, setIsSuccess] = useState(false);
+  // const { VerificationString } = useParams();
+  // const [, setToken] = useToken();
 
-  useEffect(() => {
-    const loadVerification = async () => {
-      try {
-        const response = await axios.put('/api/verification-strings', {
-          VerificationString,
-        });
-        const { token } = response.data;
-        setToken(token);
+  // useEffect(() => {
+  //   const loadVerification = async () => {
+  //     try {
+  //       const response = await axios.put('/api/verification-strings', {
+  //         VerificationString,
+  //       });
+  //       const { token } = response.data;
+  //       setToken(token);
 
-        setIsSuccess(true);
-        setIsLoading(false);
-      } catch (e) {
-        setIsSuccess(false);
-        setIsLoading(false);
-      }
-    };
+  //       setIsSuccess(true);
+  //       setIsLoading(false);
+  //     } catch (e) {
+  //       setIsSuccess(false);
+  //       setIsLoading(false);
+  //     }
+  //   };
 
-    loadVerification();
-  }, [setToken, VerificationString]);
+  //   loadVerification();
+  // }, [setToken, VerificationString]);
 
-  setIsSuccess(false); // Just for purposes of testing and restyling the EmailNotVerified component
+  // if (isLoading) return <div id='loading'>Loading...</div>;
+  // if (!isSuccess) return <EmailNotVerified />;
+  // return <EmailVerified />;
 
-  if (isLoading) return <div id='loading'>Loading...</div>;
-  if (!isSuccess) return <EmailNotVerified />;
-  return <EmailVerified />;
+  return <EmailNotVerified />;
 };
