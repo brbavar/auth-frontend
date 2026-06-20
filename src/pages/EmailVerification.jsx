@@ -32,6 +32,8 @@ export const EmailVerification = () => {
     loadVerification();
   }, [setToken, VerificationString]);
 
+  setIsSuccess(false); // Just for purposes of testing and restyling the EmailNotVerified component
+
   if (isLoading) return <div id='loading'>Loading...</div>;
   if (!isSuccess) return <EmailNotVerified />;
   return <EmailVerified />;
