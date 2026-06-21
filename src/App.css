@@ -241,7 +241,7 @@ body:has(> #root > :where(#email-verified, #logged-in)) {
   );
 }
 
-.container#email-not-verified {
+body:has(> #root > .container#email-not-verified) {
   background-image: linear-gradient(
     60deg,
     rgba(8, 7, 7, 0.8),
